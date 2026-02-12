@@ -12,21 +12,23 @@ from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import serialization
 import base64
 
+#Create public and private key pair
 private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
 public_key = private_key.public_key()
 
+#sniff for ICMP packets
 def get_packets(packet):
   global key
 
   if packet.haslayer(ICMP) and packet.haslayer(Raw):
     payload = packet[Raw].load
-
+#If payload starts with key, decrypt as Fernet key
     if payload.startswith(b"KEY:"):
       encrypted_key = payload[4:]
       decode_key = base64.urlsafe_b64decode(encrypted_key)
 
       key = private_key.decrypt(decode_key, padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()),algorithm=hashes.SHA256(), label=None))
-
+#If payload starts with MSG decrypt using Fernet key as message
     elif payload.startswith(b"MSG:") and key:
       encrypted_message = payload[4:]
       f = Fernet(key)
@@ -36,10 +38,16 @@ public_bytes = public_key.public_bytes(encoding=serialization.Encoding.PEM, form
 
 #Change client ip
 client_ip = "192.168.19.131"
+#Send public key to client (Client must be started and listening before running server
 packet = IP(dst=client_ip)/ICMP()/Raw(load=b"PUB:" + public_bytes)
 send(packet, verbose =0)
 
+<<<<<<< HEAD
 while True:
   sniff(filter="icmp and src=" + client_ip, prn=get_packets, count = 1)
   packet = IP(dst=client_ip)/ICMP()/Raw(load="MSG: connected")
   send(packet, verbose = 0)
+=======
+#Continue to sniff for ICMP packets and process them as they come in
+sniff(filter="icmp", prn=get_packets)
+>>>>>>> 8251378a4962abea48dbcf29d81914ea47da891a
