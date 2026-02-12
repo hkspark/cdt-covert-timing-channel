@@ -39,5 +39,7 @@ client_ip = "192.168.19.131"
 packet = IP(dst=client_ip)/ICMP()/Raw(load=b"PUB:" + public_bytes)
 send(packet, verbose =0)
 
-
-sniff(filter="icmp", prn=get_packets)
+while True:
+  sniff(filter="icmp and src=" + client_ip, prn=get_packets, count = 1)
+  packet = IP(dst=client_ip)/ICMP()/Raw(load="MSG: connected")
+  send(packet, verbose = 0)

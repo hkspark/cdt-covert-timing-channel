@@ -21,6 +21,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
 import time
 import base64
+import random
 
 
 
@@ -65,6 +66,18 @@ def get_key():
   sniff(filter="icmp", prn=get_packet, stop_filter=get_packet)
   return public_key
 
+def process_packet(packet, key):
+  if packet.haslayer(ICMP) and packet.haslayer(Raw):
+    payload = packet[Raw].load
+
+    if payload.startswith(b"MSG:"):
+      encrypted_message = payload[4:]
+      f = Fernet(key)
+      print(f.decrypt(encrypted_message))
+      return True
+  return False
+      
+
 def main():
   public_key = get_key()
   key, encrypted_key = generate_key(public_key)
@@ -74,9 +87,13 @@ def main():
   target_ip = input()
   send_key(target_ip, key)
   print("Sent key to server")
-  encrypted = encode_message(message, key)
-  create_packet(target_ip, encrypted)
-  print("Sent packet to Server")
+  while True:
+    encrypted = encode_message(message, key)
+    create_packet(target_ip, encrypted)
+    print("Sent packet to Server")
+    RNG = random.randint(0.1, 100)
+    time.sleep(RNG)
+    sniff(filter="icmp and src=" + target_ip, prn=process_packet(key), count=1)
 
 if(__name__ == "__main__"):
   main()
