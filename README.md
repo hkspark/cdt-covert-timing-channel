@@ -2,10 +2,6 @@
 
 #Should probably change name to ICMP channel
 
-#Mostly done
+#Done, tested, works
 
-#Need to fix errors
-
-#Tested some, need more
-
-#Need to implement constant listener on client and send packet rate in order to ensure client is still connected to server (Blue Team hasn't found it and blocked it)
+#Make sure to change Client IP in server before sending
