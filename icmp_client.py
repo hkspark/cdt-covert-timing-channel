@@ -75,6 +75,7 @@ def get_key():
 def process_packet(packet, key):
   if packet.haslayer(ICMP) and packet.haslayer(Raw):
     payload = packet[Raw].load
+    print(payload)
 
     if payload.startswith(b"MSG:"):
       encrypted_message = payload[4:]
@@ -91,15 +92,15 @@ def main():
   message = input()
   print("Enter target IP: ")
   target_ip = input()
-  send_key(target_ip, key)
+  send_key(target_ip, encrypted_key)
   print("Sent key to server")
   while True:
     encrypted = encode_message(message, key)
     create_packet(target_ip, encrypted)
     print("Sent packet to Server")
-    RNG = random.randint(0.1, 100)
+    RNG = random.randint(1, 100)
     time.sleep(RNG)
-    sniff(filter="icmp and src=" + target_ip, prn=process_packet(key), count=1)
+    sniff(filter="icmp and src " + target_ip, prn=lambda pkt:process_packet(pkt, key), count=1)
 
 if(__name__ == "__main__"):
   main()
