@@ -34,7 +34,6 @@ def get_packets(packet):
       encrypted_message = payload[4:]
       f = Fernet(key)
       decrypted_message = f.decrypt(encrypted_message).decode()
-      print(decrypted_message)
 public_bytes = public_key.public_bytes(encoding=serialization.Encoding.PEM, format=serialization.PublicFormat.SubjectPublicKeyInfo)
 
 #Change client ip
