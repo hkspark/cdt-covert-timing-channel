@@ -13,6 +13,7 @@ Requirements and Dependecies:  Target OS: Linux  Required Libraries: python3, li
 Installation Instruction: Ensure machine is updated and has required packages installed (see above) then download the icmp_client.py file on Red Team machine and icmp_server.py file on Blue Team Machine. Run the client before the server, using python3 icmp_(client/server).py. Check client terminal and input message and server IP, once "Sent key" message is visible, it will continue running.
 
 Usage Instructions: Run using python3 icmp_client.py and python3 icmp_server.py on the respected machines. Both files are .py Python files. Run this once we have a connection to a Blue Team machine to ensure the connection stays until Blue Team finds it and terminates it. Can implement running the message on command line if we need another C2, as well as using icmpsh or icmpdoor to get access to a terminal on Blue Team Machines.
+[Client Before Packet Sends, Note the user input the message and server's IP address](/example_screenshots/client_before_packet_send.png)
 
 Example Output on Client:  Enter Message: Hello World  Enter Target IP:  10.0.6.42  Sent key to server  Sent packet to server  MSG:"Connected"  (Will repeat "Sent packet to server" and "MSG:Connected" while server is running)
 
