@@ -4,6 +4,8 @@
 
 #Make sure to change Client IP in server before sending
 
+Attention all users: This tool is explicitly made for ethical use purposes only and any adaptation or use of this for malicious purposes is prohibited. 
+
 Tool Overview: This tool is created to send a message to a blue team device and stay connected with random continuous callbacks for as long as the script is running on the blue team device. This is useful for Red Team to ensure we are still connected to Blue Team's machines. This tool fits into the Beacon/Callback category as it is a callback script. This tool runs via 2 scripts, one on the client and one on the server. The server will send it's public key and the client will respond with an RSA encrypted Fernet key in order to decrypt the messages sent from the client. After, the client will send the message on reandom intervals (between 1 and 100 seconds) and the server will recieve the message, wait 1 - 100 seconds and respond with a "Connected" message.
 
 Requirements and Dependecies:  Target OS: Linux  Required Libraries: python3, libpcap-dev, python3-cryptography, python3-scapy - To install: sudo apt update  sudo apt install python3 libpcap-dev  sudo apt install python3-cryptography python3-scapy  This tool does require root privilege to run because it's sniffing network traffic. The server script needs to be updated with the Client IP on line 41 before deploying to server machine.
