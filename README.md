@@ -14,6 +14,10 @@ Installation Instruction: Ensure machine is updated and has required packages in
 
 Usage Instructions: Run using python3 icmp_client.py and python3 icmp_server.py on the respected machines. Both files are .py Python files. Run this once we have a connection to a Blue Team machine to ensure the connection stays until Blue Team finds it and terminates it. Can implement running the message on command line if we need another C2, as well as using icmpsh or icmpdoor to get access to a terminal on Blue Team Machines.
 [Client Before Packet Sends, Note the user input the message and server's IP address](/example_screenshots/client_before_packet_send.png)
+[Client After Packet Sends](/example_screenshots/after_packet_send_client.png)
+[Server Decrypt Message, Note Printing to Terminal was for testing only](/example_screenshots/server_decrypt_message_for_test.png)
+[Server Decrypt Second Message](/example_screenshots/server_decrypt_message_reply_for_test.png)
+[Client Receives Connected Message From Server](/example_screenshots/connected_message_from_server.png)
 
 Example Output on Client:  Enter Message: Hello World  Enter Target IP:  10.0.6.42  Sent key to server  Sent packet to server  MSG:"Connected"  (Will repeat "Sent packet to server" and "MSG:Connected" while server is running)
 
