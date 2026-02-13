@@ -74,7 +74,6 @@ def get_key():
 def process_packet(packet, key):
   if packet.haslayer(ICMP) and packet.haslayer(Raw):
     payload = packet[Raw].load
-    print(payload)
 
     if payload.startswith(b"MSG:"):
       encrypted_message = payload[4:]
