@@ -3,7 +3,6 @@
 
 """
 
-#idk how to implement on blue team infra
 
 from scapy.all import *
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
