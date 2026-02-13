@@ -49,7 +49,6 @@ def send_key(target_ip, key):
 def create_packet(target_ip, encrypted):
     packet = IP(dst=target_ip)/ICMP()/Raw(load=b"MSG:" + encrypted)
     send(packet, verbose=0)
-    time.sleep(0.2)
     return "Packet sent complete"
 
 #Function to get server's public key
@@ -96,10 +95,10 @@ def main():
   print("Sent key to server")
   while True:
     encrypted = encode_message(message, key)
-    create_packet(target_ip, encrypted)
-    print("Sent packet to Server")
     RNG = random.randint(1, 100)
     time.sleep(RNG)
+    create_packet(target_ip, encrypted)
+    print("Sent packet to Server")
     sniff(filter="icmp and src " + target_ip, prn=lambda pkt:process_packet(pkt, key), count=1)
 
 if(__name__ == "__main__"):
