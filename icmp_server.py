@@ -47,7 +47,7 @@ sniff(filter="icmp and src " + client_ip, prn=get_packets, count = 2)
 
 while True:
   sniff(filter="icmp and src " + client_ip, count = 1, prn=get_packets)
-  packet = IP(dst=client_ip)/ICMP()/Raw(load="MSG: connected")
-  send(packet, verbose = 0)
+  packet = IP(dst=client_ip)/ICMP()/Raw(load=b"MSG: connected")
   rng = random.randint(1, 100)
   time.sleep(rng)
+  send(packet, verbose = 0)
