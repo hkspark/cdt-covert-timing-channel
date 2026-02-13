@@ -24,10 +24,6 @@ Usage Instructions: Run using python3 icmp_client.py and python3 icmp_server.py 
 
 [Client Receives Connected Message From Server](/example_screenshots/connected_message_from_server.png)
 
-Example Output on Client:  Enter Message: Hello World  Enter Target IP:  10.0.6.42  Sent key to server  Sent packet to server  MSG:"Connected"  (Will repeat "Sent packet to server" and "MSG:Connected" while server is running)
-
-Example Output on Server: Nothing, we want it to be stealthy
-
 Operational Notes: Use this in competition scenarios to get Blue Team to know Red Team is still in their system. Red Team can use it to know they still have access to that Blue Team mcahine. This tool will create ICMP traffic with a "Data" field, however all data is encrypted so Blue Team won't see the data in plain text. It will also show a terminal running for this process. The cleanup process is to delete the icmp_server.py file from the Blue Team machine. This will terminate the connection.
 
 Limitations: Currently this tool does not send any commands to the command line but it can be implemented fairly easily. There are no known bugs or issues. Future improvement ideas are to implement it as a background process so it's more stealthy.
