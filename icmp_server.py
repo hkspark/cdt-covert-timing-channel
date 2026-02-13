@@ -11,6 +11,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import serialization
 import base64
+import random
 
 #Create public and private key pair
 private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
@@ -42,10 +43,12 @@ client_ip = "192.168.19.131"
 packet = IP(dst=client_ip)/ICMP()/Raw(load=b"PUB:" + public_bytes)
 send(packet, verbose =0)
 
-sniff(filter="icmp and src " + client_ip, prn=get_packets, count = 1)
+sniff(filter="icmp and src " + client_ip, prn=get_packets, count = 2)
 
 while True:
   sniff(filter="icmp and src " + client_ip, count = 1)
   packet = IP(dst=client_ip)/ICMP()/Raw(load="MSG: connected")
   send(packet, verbose = 0)
+  rng = random.randint(1, 100)
+  time.sleep(rng)
 #Continue to sniff for ICMP packets and process them as they come in
