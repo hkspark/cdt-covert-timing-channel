@@ -74,25 +74,26 @@ def get_key():
 def process_packet(packet, key):
   if packet.haslayer(ICMP) and packet.haslayer(Raw):
     payload = packet[Raw].load
+    payload.decode()
 
     if payload.startswith(b"MSG:"):
       encrypted_message = payload[4:]
       f = Fernet(key)
       print(f.decrypt(encrypted_message))
-      return True
+      return f.decrypt(encrypted_message)
   return False
       
 
 def main():
   public_key = get_key()
   key, encrypted_key = generate_key(public_key)
-  print("Enter message: ")
-  message = input()
   print("Enter target IP: ")
   target_ip = input()
   send_key(target_ip, encrypted_key)
   print("Sent key to server")
   while True:
+    print("Enter message: ")
+    message = input()
     encrypted = encode_message(message, key)
     RNG = random.randint(1, 100)
     time.sleep(RNG)
