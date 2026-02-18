@@ -8,9 +8,9 @@
 <QueryList>
   <Query Id="0" Path="Microsoft-Windows-PowerShell/Operational">
     <Select Path="Microsoft-Windows-PowerShell/Operational">
-      *[System[(EventID=4104)]]
+     *[System[(EventID=4104)]]
       and
-      EventData[Data and contains(Data, 'ls')]
+    *[EventData[Data[contains(.,'ls')]]]
     </Select>
   </Query>
 </QueryList>
