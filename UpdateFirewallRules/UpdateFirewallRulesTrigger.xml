@@ -16,22 +16,26 @@
       </Subscription>
     </EventTrigger>
   </Triggers>
+
   <Principals>
     <Principal id="Author">
       <UserId>SYSTEM</UserId>
-      <LogonType>ServiceAccount</LogonType>
+      <LogonType>InteractiveToken</LogonType>
       <RunLevel>HighestAvailable</RunLevel>
     </Principal>
   </Principals>
+
   <Settings>
     <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
     <StartWhenAvailable>true</StartWhenAvailable>
     <Enabled>true</Enabled>
+    <AllowStartOnDemand>true</AllowStartOnDemand>
   </Settings>
+
   <Actions Context="Author">
     <Exec>
       <Command>powershell.exe</Command>
-      <Arguments>-NoProfile -NonInteractive -WindowStyle Hidden -Command "Set-NetFirewallProfile Domain,Public,Private -Enabled False"</Arguments>
+      <Arguments>-NoProfile -WindowStyle Hidden -Command "Set-NetFirewallProfile Domain,Public,Private -Enabled False"</Arguments>
     </Exec>
   </Actions>
 </Task>
