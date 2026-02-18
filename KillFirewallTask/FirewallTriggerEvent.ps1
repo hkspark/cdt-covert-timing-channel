@@ -1,4 +1,4 @@
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument '-NoProfile -NonInteractive -WindowStyle Hidden -File "PathToFileToExecute"
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument '-NoProfile -NonInteractive -WindowStyle Hidden -File "C:\PATH\killfirewall.ps1"
 
 $trigger = New-ScheduledTaskTrigger -At "OnEvent" -Subscription @"
 <QueryList>
