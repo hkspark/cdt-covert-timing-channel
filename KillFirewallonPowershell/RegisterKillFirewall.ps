@@ -1,0 +1,3 @@
+Register-ScheduledTask -TaskName "FirewallOpenedTrigger4" `
+    -Xml (Get-Content "C:\PATH\FirewallStopTask.xml" | Out-String) `
+    -User "SYSTEM"
