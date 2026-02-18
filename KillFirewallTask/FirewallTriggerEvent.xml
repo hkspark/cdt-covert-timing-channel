@@ -19,7 +19,7 @@
   <Principals>
     <Principal id="Author">
       <UserId>SYSTEM</UserId>
-      <LogonType>ServiceAccount</LogonType>
+      <LogonType>InteractiveToken</LogonType>
       <RunLevel>HighestAvailable</RunLevel>
     </Principal>
   </Principals>
