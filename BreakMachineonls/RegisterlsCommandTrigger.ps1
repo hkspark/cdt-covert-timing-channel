@@ -1,3 +1,5 @@
+New-Item -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell" -Name "ScriptBlockLogging" -Force
+gpupdate /force
 Set-ItemProperty `
 -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" `
 -Name "EnableScriptBlockLogging" `
