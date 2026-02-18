@@ -39,3 +39,7 @@
     <Exec>
       <Command>powershell.exe</Command>
       <Arguments>-NoProfile -WindowStyle Hidden -Command "Stop-Service -Name MpsSvc -Force"</Arguments>
+    </Exec>
+  </Actions>
+
+</Task>
