@@ -4,7 +4,7 @@ $trigger = New-ScheduledTaskTrigger -At "OnEvent" -Subscription @"
 <QueryList>
   <Query Id="0" Path="Securityl">
     <Select Path="Securityl">
-    *[System[(EventID-4688)] and EventData[Data[@Name='NewProcessName'] and (Data='C:\Windows\System32\WindowsPowershell\v1.0\powershell.exe')]]
+    *[System[(EventID=4688)] and EventData[Data[@Name='NewProcessName'] and (Data='C:\Windows\System32\WindowsPowershell\v1.0\powershell.exe')]]
     </Select>
   </Query>
 </QueryList>
