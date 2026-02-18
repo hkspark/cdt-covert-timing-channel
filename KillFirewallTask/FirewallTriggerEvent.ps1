@@ -1,4 +1,4 @@
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -ArgumentList "-NoProfile -NonInteractive -WindowStyle Hidden -Command `"Stop-Service -Name MpsSvc -Force`""
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -NonInteractive -WindowStyle Hidden -Command `"Stop-Service -Name MpsSvc -Force`""
 
 $trigger = New-ScheduledTaskTrigger -OnEvent -Subscription @"
 <QueryList>
