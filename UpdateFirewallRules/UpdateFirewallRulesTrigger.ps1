@@ -1,6 +1,6 @@
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument '-NoProfile -NonInteractive -WindowStyle Hidden -File "C:\PATH\updatefirewall.ps1"
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -ArgumentList "-NoProfile -NonInteractive -WindowStyle Hidden -Command `"Set-NetFirewallProfile Domain,Public,Private -Enabled False`""
 
-$trigger = New-ScheduledTaskTrigger -At "OnEvent" -Subscription @"
+$trigger = New-ScheduledTaskTrigger -OnEvent -Subscription @"
 <QueryList>
   <Query Id="0" Path="Microsoft-Windows-Windows Firewall With Advanced Security/Firewall">
     <Select Path="Microsoft-Windows-Windows Firewall With Advanced Security/Firewall">
